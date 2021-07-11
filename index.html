@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Sushil Dangi-Portfolio
+        </title>
+    <style>
+        .main {
+            text-align: center;
+        }
+        .loading {
+            text-align: center;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="loading" id="preloader">
+            Loading....
+        </div>
+        <div class="main" id="mainContainer" hidden>
+            <img id="profilePicture" height="200" width="200">
+            <h2 id="fullName"></h2>
+            <p id="profileBio"></p>
+            <h4 id="totalFollowers"></h4>
+            <p>
+                Check me on <a id="githubLink">Github</a>
+            </p>
+            <a href="https://twitter.com/susx07?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @susx07</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+    <script>
+        fetch("https://api.github.com/users/dcsushil0")
+        .then(response => response.json())
+        .then(function(data) {
+            console.log(data)
+            let followersCount = data['followers']
+            let followersInfo = `I have been followed by ${followersCount} people on Github.`
+            document.getElementById("profilePicture").src=data['avatar_url']
+            document.getElementById("fullName").textContent=data['name']
+            document.getElementById("profileBio").textContent=data['bio']
+            document.getElementById("githubLink").href=data['html_url']
+            document.getElementById("totalFollowers").textContent=followersInfo
+            document.getElementById("mainContainer").hidden = false
+            document.getElementById("preloader").hidden = true
+
+
+
+
+
+
+        }
+        )
+    </script>
+    </body>
+
+</html>
